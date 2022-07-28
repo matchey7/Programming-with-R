@@ -585,3 +585,10 @@ analyze <- function(filename, output = NULL) {
 }
 
 analyze_all("inflammation.*csv")
+
+#===============================
+# Dynamic Reports with knitr
+#===============================
+
+install.packages("knitr")
+
