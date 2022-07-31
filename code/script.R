@@ -634,4 +634,10 @@ search()
 #===============================
 
 # In RStudio, typing Alt + "-" will write <- in a single key stroke
-<- 
+# <-
+  
+#===============================
+# Addressing Data
+#===============================
+
+dat <- read.csv(file = 'data.sample.csv', header = TRUE, stringsAsFactors = FALSE)
