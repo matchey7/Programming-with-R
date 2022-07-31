@@ -592,3 +592,39 @@ analyze_all("inflammation.*csv")
 
 install.packages("knitr")
 
+#===============================
+# Making packages in R
+#===============================
+
+install.packages(c("devtools", "roxygen2"))  # installations can be `c`ombined
+library("devtools")
+library("roxygen2")
+
+?setwd
+getwd()
+setwd("C:/Users/Lenovo User/Desktop/r-novice-inflammation")
+create_package("tempConvert")
+1
+setwd("./tempConvert")
+document()
+setwd("..")
+install("tempConvert")
+?fahrenheit_to_kelvin
+search()
+fahrenheit_to_celsius(32)
+celsius_to_kelvin(-273.15)
+fahrenheit_to_kelvin(-459.67)
+kelvin_to_celsius(273.15)
+
+create_package("analyze")
+3
+
+setwd("./analyze")
+document()
+setwd("..")
+install("analyze")
+?analyze
+
+analyze_all("inflammation.*csv")
+
+search()
