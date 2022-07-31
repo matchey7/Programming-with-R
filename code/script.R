@@ -628,3 +628,10 @@ install("analyze")
 analyze_all("inflammation.*csv")
 
 search()
+
+#===============================
+# Introduction to RStudio
+#===============================
+
+# In RStudio, typing Alt + "-" will write <- in a single key stroke
+<- 
