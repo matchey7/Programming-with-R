@@ -803,3 +803,62 @@ write.csv(carSpeeds,
           row.names = FALSE,
           na = '-9999')
 
+#===============================
+# Understanding Factors
+#===============================
+
+sex <- factor(c('male','female','female','male'))
+levels(sex)
+nlevels(sex)
+
+food <- factor(c("low", "high", "medium", "high", "low", "medium", "high"))
+levels(food)
+
+food <-  factor(food, levels = c("low", "medium", "high"))
+levels(food)
+
+min(food)
+
+food <- factor(food, levels = c("low", "medium", "high"), ordered = TRUE)
+levels(food)
+
+min(food) # works!
+
+exercise <- factor(c("l", "n", "n", "i", "l", levels = c("n", "l", "i")), ordered = TRUE)
+levels(exercise)
+min(exercise)
+
+f <- factor(c(3.4, 1.2, 5))
+as.numeric(f)
+levels(f)[f]
+
+f <- levels(f)[f]
+f <- as.numeric(f)
+f
+
+dat <- read.csv(file = 'data/sample.csv', stringsAsFactors = TRUE)
+
+str(dat)
+summary(dat)
+
+table(dat$Group)
+
+barplot(table(dat$Group))
+
+dat$Group <- factor(dat$Group, levels = c("Treatment1", "Treatment2", "Control"))
+barplot(table(dat$Group))
+
+barplot(table(dat$Gender))
+
+dat$Gender[dat$Gender == 'M'] <- 'm'
+
+plot(x = dat$Gender, y = dat$BloodPressure)
+
+dat$Gender <- droplevels(dat$Gender)
+
+plot(x = dat$Gender, y = dat$BloodPressure)
+
+levels(dat$Gender)[2] <- 'f'
+
+plot(x = dat$Gender, y = dat$BloodPressure)
+
