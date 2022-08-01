@@ -640,4 +640,166 @@ search()
 # Addressing Data
 #===============================
 
-dat <- read.csv(file = 'data.sample.csv', header = TRUE, stringsAsFactors = FALSE)
+dat <- read.csv(file = 'data/sample.csv', header = TRUE, stringsAsFactors = FALSE)
+
+class(dat)
+
+str(dat)
+
+head(dat)
+
+dat[1,1]
+
+dat[,2]
+
+6:9
+
+dat[,6:9]
+
+dat[c(1, 5, 7, 9), 1:5]
+
+dat[1:5, c(5, 2)]
+
+colnames(dat)
+
+dat$Gender
+
+class(dat$Gender)
+
+class(dat$BloodPressure)
+
+head(dat[, c('Age', 'Gender')])
+
+rownames(dat)
+
+dat2 <- read.csv(file = 'data/sample.csv', header = TRUE, stringsAsFactors = FALSE, row.names=1)
+
+rownames(dat2)
+
+dat2["Sub072",]
+
+dat2[c("Sub009", "Sub072"), ]
+
+dat3 <- read.csv(file = 'data/sample.csv', header = TRUE, stringsAsFactors = FALSE, row.names=3)
+
+c(TRUE, TRUE, FALSE, FALSE, TRUE)
+
+x <- c(1, 2, 3, 11, 12, 13)
+x < 10
+x %in% 1:10
+
+index <- dat$Group == 'Control'
+
+dat[index,]$BloodPressure
+
+plot(dat[dat$Group == 'Control', ]$BloodPressure)
+
+plot(dat[dat$Group != 'Control', ]$BloodPressure)
+
+x <- c(1, 2, 3, 11, 12, 13)
+
+x[x < 10] <- 0
+
+x
+
+# assign values to a dataframe
+dat <- read.csv(file = 'data/sample.csv', header = TRUE, stringsAsFactors = FALSE)
+dat[dat$Gender == 'M',]$Gender <- 'm'
+dat[dat$Gender == 'F',]$Gender <- 'f'
+dat
+
+#===============================
+# Reading and Writing CSV Files
+#===============================
+
+# Import the data and look at the first six rows
+carSpeeds <- read.csv(file = 'data/car-speeds.csv')
+head(carSpeeds)
+
+# The first row of the data without setting the header argument:
+carSpeeds[1,]
+
+# The first row of the data if the header argument is set to FALSE:
+carSpeeds <- read.csv(file = 'data/car-speeds.csv', header = FALSE)
+carSpeeds[1,]
+
+# Here we will use R's `ifelse` function, in which we provide the test phrase,
+# the outcome if the result of the test is 'TRUE', and the outcome if the
+# result is 'FALSE'. We will also assign the results to the Color column, 
+# using ` <-`
+
+# First - reload the data with a header
+carSpeeds <- read.csv(file = 'data/car-speeds.csv', stringsAsFactors = TRUE)
+
+carSpeeds$Color <- ifelse(carSpeeds$Color == 'Blue', 'Green', carSpeeds$Color)
+carSpeeds$Color
+
+# Reload the data with a header (the previous ifelse call modifies attributes)
+carSpeeds <- read.csv(file = 'data/car-speeds.csv', stringsAsFactors = TRUE)
+
+str(carSpeeds)
+
+carSpeeds <- read.csv(file = 'data/car-speeds.csv', stringsAsFactors = FALSE)
+str(carSpeeds)
+
+carSpeeds$Color <- ifelse(carSpeeds$Color == 'Blue', 'Green', carSpeeds$Color)
+carSpeeds$Color
+
+carSpeeds <- read.csv(file = 'data/car-speeds.csv', as.is = 1)
+
+# Note, the 1 applies as.is to the first column only
+
+carSpeeds$Color <- ifelse(carSpeeds$Color == 'Blue', 'Green', carSpeeds$Color)
+carSpeeds$State <- ifelse(carSpeeds$State == 'Arizona', 'Ohio', carSpeeds$State)
+str(carSpeeds)
+carSpeeds$Color
+carSpeeds$State
+
+carSpeeds <- read.csv(file = 'data/car-speeds.csv')
+str(carSpeeds)
+# Replace 'Blue' with 'Green' in cars$Color without using the stringAsFactors
+# or as.is arguments
+carSpeeds$Color <- ifelse(as.character(carSpeeds$Color) == 'Blue',
+                          'Green',
+                          as.character(carSpeeds$Color))
+# Convert colors back to factors
+carSpeeds$Colors <- as.factor(carSpeeds$Color)
+str(carSpeeds)
+
+# We use the built-in unique() function to extract the unique colors in our dataset
+unique(carSpeeds$Color)
+
+carSpeeds <- read.csv(
+  file = 'data/car-speeds.csv',
+  stringsAsFactors = FALSE,
+  strip.white = TRUE,
+  sep = ','
+  )
+
+unique(carSpeeds$Color)
+
+?read.csv
+
+dat <- read.csv(file = 'data/inflammation-01.csv', na.strings = '0')
+dat
+
+dat <- read.csv(file = 'data/car-speeds.csv', na.strings = c('Black', 'Blue'))
+dat
+
+# Export the data. The write.csv() function requires a minimum of two 
+# arguments, the data to be saved and the name of the output file.
+
+write.csv(carSpeeds, file = 'data/car-speeds-cleaned.csv')
+
+write.csv(carSpeeds, file = 'data/car-speeds-cleaned.csv', row.names = FALSE)
+
+# First, replace the speed in the 3rd row with NA, by using an index (square
+# brackets to indicate the position of the value we want to replace)
+carSpeeds$Speed[3] <- NA
+head(carSpeeds)
+
+write.csv(carSpeeds,
+          file = 'data/car-speeds-cleaned.csv',
+          row.names = FALSE,
+          na = '-9999')
+
