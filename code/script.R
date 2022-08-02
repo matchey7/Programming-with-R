@@ -1050,3 +1050,74 @@ original <- 32
 final <- fahrenheit_to_kelvin(original)
 
 # I have covered this lesson previously in 'Creating Functions'
+
+#===============================
+# Loops in R
+#===============================
+
+analyze <- function(filename) {
+  # Plots the average, min and max inflammation over time.
+  # Input is character string of a csv file.
+  dat <- read.csv(file = filename, header = FALSE)
+  avg_day_inflammation <- apply(dat, 2, mean)
+  plot(avg_day_inflammation)
+  max_day_inflammation <- apply(dat, 2, max)
+  plot(max_day_inflammation)
+  min_day_inflammation <- apply(dat, 2, min)
+  plot(min_day_inflammation)
+}
+
+filenames <- list.files(path = "data", pattern = "inflammation-[0-9]{2}.csv", full.names = TRUE)
+
+a <- 1:10
+b <- 1:10
+
+res <- numeric(length = length(a))
+for (i in seq_along(a)) {
+  res[i] <- a[i] + b[i]
+}
+res
+
+res2 <- a + b
+all.equal(res, res2)
+
+a <- 1:10
+b <- 1:5
+a+b
+
+a <- 1:10
+b <- 5
+a * b
+
+a <- 1:10
+b <- 1:7
+a+b
+
+sapply(filenames, FUN = analyze)
+
+analyze2 <- function(filenames) {
+  for (f in seq_along(filenames)) {
+    fdata <- read.csv(filenames[f], header = FALSE)
+    res <- apply(fdata, 2, mean)
+    if (f == 1) {
+      out <- res
+    } else {
+      # The loop is slowed by this call to cbind that grows the object
+      out <- cbind(out, res)
+    }
+  }
+  return(out)
+}
+
+system.time(avg2 <- analyze2(filenames))
+
+analyze3 <- function(filenames) {
+  out <- matrix(ncol = length(filenames), nrow = 40) # assuming 40 here from files
+  for (f in seq_along(filenames)) {
+    fdata <- read.csv(filenames[f], header = FALSE)
+    out[, f] <- apply(fdata, 2, mean)
+  }
+  return(out)
+}
+
+system.time(avg3 <- analyze3(filenames))
