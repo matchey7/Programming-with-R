@@ -602,8 +602,9 @@ library("roxygen2")
 
 ?setwd
 getwd()
-setwd("C:/Users/Lenovo User/Desktop/r-novice-inflammation")
-create_package("tempConvert")
+3
+2
+1
 1
 setwd("./tempConvert")
 document()
@@ -1040,3 +1041,12 @@ dat[1, 3]
 dat[["y"]]
 dat$y
 str(PlantGrowth)
+
+#===============================
+# The Call Stack
+#===============================
+
+original <- 32
+final <- fahrenheit_to_kelvin(original)
+
+# I have covered this lesson previously in 'Creating Functions'
